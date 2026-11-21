@@ -1,5 +1,5 @@
 name: fix-structure
-on: push
+on: workflow_dispatch
 permissions:
   contents: write
 jobs:
