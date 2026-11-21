@@ -1,0 +1,26 @@
+name: fix-structure
+on: push
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: reorganize
+        run: |
+          set -e
+          mkdir -p src-tauri/src src-tauri/capabilities public docs
+          mv -f Cargo.toml Cargo.lock build.rs tauri.conf.json src-tauri/ 2>/dev/null || true
+          mv -f default.json src-tauri/capabilities/ 2>/dev/null || true
+          for f in db.rs backup.rs export.rs im.rs main.rs media.rs model.rs models_seed.rs order.rs plugin.rs print.rs shell.rs single.rs; do
+            if [ -f "$f" ]; then mv -f "$f" src-tauri/src/; fi
+          done
+          mv -f index.html pinyin.js public/ 2>/dev/null || true
+          mv -f "开发工作日志_v0.1.1基线.md" docs/ 2>/dev/null || true
+          rm -f test.txt zz_test_flat.txt
+          git config user.name Aevair
+          git config user.email aevair@users.noreply.github.com
+          git add -A
+          git commit -m "整理目录结构：源码归位到 src-tauri / public / docs" || true
+          git push
