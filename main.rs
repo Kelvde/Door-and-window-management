@@ -53,7 +53,7 @@ fn meta(state: tauri::State<'_, AppState>) -> Result<Meta, String> {
     let data_dir = db::data_dir().to_string_lossy().to_string();
     let company_name = {
         let conn = state.order_service.db.lock().unwrap();
-        db::get_config(&conn, "company.name").unwrap_or_else(|| "鑫福门窗".to_string())
+        db::get_config(&conn, "company.name").unwrap_or_default()
     };
     let operator_name = {
         let conn = state.order_service.db.lock().unwrap();

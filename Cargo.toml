@@ -2,7 +2,7 @@
 name = "door-window-manager"
 version = "0.1.0"
 description = "门窗管理软件 - 瘦核心 + 插件架构 (Apache 2.0)"
-authors = ["you"]
+authors = ["Aevair"]
 license = "Apache-2.0"
 edition = "2021"
 

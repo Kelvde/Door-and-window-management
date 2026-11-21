@@ -479,7 +479,7 @@ pub fn init() -> Connection {
         ("backup.manual.retain", "20".to_string()),
         ("backup.compress", "true".to_string()),
         ("backup.format", "gz".to_string()),
-        ("company.name", "鑫福门窗".to_string()),
+        ("company.name", String::new()),
         ("operator.name", "管理员".to_string()),
         // 是否允许多开(默认禁止多开)
         ("app.allow_multi_open", "false".to_string()),
@@ -2111,7 +2111,7 @@ mod seed_tests {
         let conn = Connection::open_in_memory().expect("open memory");
         conn.execute_batch(SCHEMA).expect("schema");
         for (k, v) in [
-            ("company.name", "鑫福门窗"), ("operator.name", "管理员"),
+            ("company.name", "测试门窗"), ("operator.name", "管理员"),
             ("app.allow_multi_open", "false"), ("backup.manual.dir", "D:/backup/manual"),
             ("backup.snapshot.interval_min", "30"), ("backup.compress", "true"),
         ] {
