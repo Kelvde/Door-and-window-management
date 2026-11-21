@@ -1,0 +1,37 @@
+[package]
+name = "door-window-manager"
+version = "0.1.0"
+description = "门窗管理软件 - 瘦核心 + 插件架构 (Apache 2.0)"
+authors = ["you"]
+license = "Apache-2.0"
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+rusqlite = { version = "0.31", features = ["bundled"] }
+flate2 = "1"
+chrono = "0.4"
+dirs = "5"
+rust_xlsxwriter = "0.66"
+
+# 只在 Windows 上：用 ShellExecuteW 直接调系统文件关联打开文件，
+# 不经过 cmd/explorer，避免参数二次转义把路径拼成 `\D:\...\`。
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.48", features = [
+    "Win32_Foundation",
+    "Win32_UI_Shell",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_System_Registry",
+    "Win32_System_Diagnostics_ToolHelp",
+    "Win32_System_Threading",
+    "Win32_System_ProcessStatus",
+] }
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]

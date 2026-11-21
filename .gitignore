@@ -1,0 +1,23 @@
+# 构建产物
+/src-tauri/target/
+/target/
+**/*.exe
+**/*.pdb
+**/*.dll
+
+# 用户数据：订单、客户、备份、导出、草稿 —— 绝对不能提交
+/data/
+/backup/
+/plugins/
+
+# 本地配置与日志
+*.log
+/data/startup.log
+/.workbuddy/
+
+# 系统 / 编辑器
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
