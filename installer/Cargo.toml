@@ -1,0 +1,27 @@
+[package]
+name = "door-window-installer"
+version = "0.1.0"
+edition = "2021"
+description = "门窗管理软件 安装器"
+
+[dependencies]
+windows-sys = { version = "0.48", features = [
+    "Win32_Foundation",
+    "Win32_UI_Shell",
+    "Win32_UI_Shell_Common",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_Globalization",
+] }
+
+[features]
+# 默认：只带基础数据（型号公式 / 玻璃公式 / 螺丝规则 / 开孔 / 默认配置），
+# 不带任何订单、客户、合同数据。
+default = []
+# 可选：连当前订单和客户一起打包（自己换电脑做整机迁移时才用）
+with-orders = []
+
+[profile.release]
+opt-level = "z"
+lto = true
+strip = true
+panic = "abort"
